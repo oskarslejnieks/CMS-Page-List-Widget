@@ -1,0 +1,58 @@
+<?php
+if ($block->getData('text_field')) {
+    echo "<h3><strong>" . $block->getData('text_field') . "</strong></h3>";
+}
+?>
+<ul>
+    <?php $cmsPages = $block->getCmsPageCollection(); ?>
+    <?php $sites = $block->getData('sites'); ?>
+
+    <?php if($block->getData('sites')) { ?>
+
+        <?php $siteExplode = explode(',', $sites) ?>
+
+        <?php foreach($siteExplode as $site) { ?>
+        <li> 
+            <a href="<?= $site ?>">
+                <?= $site?> 
+            </a>
+        </li>
+        <?php } ?>
+    <?php }
+
+    elseif($block->getData('dropdown_field')) { ?>
+        <?php foreach ($cmsPages as $cmsPage) { ?>
+            <li>
+                <a href="<?=$cmsPage->getIdentifier() ?>">
+                    <?php echo $cmsPage->getTitle() ?>
+                </a>
+            </li>
+        <?php } ?>
+<?php } ?>
+</ul>
+    
+<?php 
+
+
+
+// echo $cmsPage->getIdentifier();
+// var_dump($block->getData('dropdown_field'));
+
+// var_dump($cmsPage->getId());
+
+// Get CMS Page Collection
+
+// var_dump(explode(',',$block->getData('sites')));
+
+?>
+
+
+
+<!-- if ($block->getData('sites')) {
+    echo '<ul><li>' . $block->getData('sites') . '<br/></li></ul>';
+} -->
+
+<!-- foreach get datasites  as sites  
+model cms page api
+explode 'sites' ?
+ -->

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+            <widget class="Magento\CustomWidget\Block\Widget\Samplewidget" id="cloudways_customwidget_samplewidget">
+                        <label>Cloudways Sample Widget</label>
+                        <description></description>
+                        <parameters>
+                                    <parameter name="widgettitle" sort_order="10" required="true" visible="true" xsi:type="text">
+                                                <label>Title</label>
+                                    </parameter>
+                                    <parameter name="widgetcontent" xsi:type="select" visible="true" required="true" sort_order="20">
+                                    <label translate="true">Display Mode</label>
+                                        <options>
+                                            <option name="all" value="All Pages">
+                                                <label>All Pages</label>
+                                            </option>
+                                            <option name="specific" value="Specific Pages">
+                                                <label>Specific pages</label>
+                                            </option>
+                                        </options>
+                                    </parameter>
+                        </parameters>
+            </widget>
+</widgets>

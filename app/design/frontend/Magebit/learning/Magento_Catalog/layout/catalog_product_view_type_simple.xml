@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Magento_Catalog::js/jquery.zoom.min.js"/>
+    </head>
+    <body>
+        <!-- Remove all unnecessary blocks -->
+
+        <referenceBlock name="view.addto.compare" remove="true" />
+        <referenceBlock name="view.addto.wishlist" remove="true" />
+        <!-- <referenceBlock name="product.info.addtocart" remove="true" /> -->
+        <referenceBlock name="product.reviews.wrapper" remove="true"/>
+        <referenceBlock name="product.info.description.wrapper" remove="true"/>
+        <!-- <referenceBlock name="catalog.product.related" remove="true"/> -->
+        <!-- <referenceBlock name="product.info.upsell" remove="true"/> -->
+
+        <!-- Move elements in their intended positions -->
+
+        <move element="product.attributes.wrapper" destination="product.info.price" after="product.price.final"/>
+        <!-- <move element="product.reviews.wrapper" destination="product.info.price" after="product.price.final"/> -->
+        <!-- <move element="product.info.stock.sku" destination="view.addto.compare" after="view.addto.wishlist"/> -->
+        <move element="product.info.type" destination="product.add.form" before="-"/>
+
+        <move element="product.info.stock.sku" destination="product.info.price" after="product.price.final"/>
+        <move element="product.info.upsell" destination="product.info.addtocart" after="product.info.addtocart"/>
+        <move element="catalog.product.related" destination="product.info.details.after.wrapper.main" after="product.info.upsell"/>
+
+        <referenceContainer name="content.aside">
+            <block class="Magento\Catalog\Block\Product\ProductList\Related" name="catalog.product.related" template="Magento_Catalog::product/list/items.phtml">
+                <arguments>
+                    <argument name="type" xsi:type="string">related</argument>
+                    <argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto" as="addto">
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="related.product.addto.compare" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+            </block>
+            <block class="Magento\Catalog\Block\Product\ProductList\Upsell" name="product.info.upsell" template="Magento_Catalog::product/list/items.phtml">
+                <arguments>
+                    <argument name="type" xsi:type="string">upsell</argument>
+                    <argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="upsell.product.addto" as="addto">
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="upsell.product.addto.compare" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+            </block>
+        </referenceContainer>
+
+
+        <block class="Magento\Framework\View\Element\Template" name="product.attributes.wrapper" template="Magento_PageBuilder::catalog/product/view/section_wrapper.phtml">
+            <arguments>
+                <argument translate="true" name="title" xsi:type="string">With the Fusion Backpack strapped on, every trek is an adventure - even a bus ride to work.</argument>
+                <argument name="section_id" xsi:type="string">additional</argument>
+            </arguments>
+                        
+            <block class="Magento\PageBuilder\Block\Catalog\Block\Product\View\Attributes" name="product.attributes.exclude.pagebuilder" as="additional" template="Magento_Catalog::product/view/attributes.phtml">
+                <arguments>
+                    <argument name="display_attributes" xsi:type="string">non_pagebuilder</argument>
+                </arguments>
+            </block>
+        </block>
+
+        <block class="Magento\Catalog\Block\Product\ProductList\Upsell" name="product.info.upsell" template="Magento_Catalog::product/list/items.phtml">
+                <arguments>
+                    <argument name="type" xsi:type="string">upsell</argument>
+                    <argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="upsell.product.addto" as="addto">
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="upsell.product.addto.compare" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+        </block>
+        
+
+        <!-- <move element="product.info.review" destination="product.info.main" before="product.info.price"/>  -->
+
+        <!-- <referenceContainer name="product.info.extrahint">
+            <block name="secure.logos" template="Magento_Catalog::secure_logos.phtml" before="-">
+                <arguments>
+                    <argument name="title" xsi:type="string">We accept</argument>
+                    <argument name="path_image" xsi:type="string">Magento_Catalog::images/payments.svg</argument>
+                </arguments>
+            </block>
+        </referenceContainer> -->
+        <referenceContainer name="product.info.type">
+            <block name="secure.logos" template="Magento_Catalog::secure_logos.phtml">
+                <arguments>
+                    <argument name="path_image" xsi:type="string" >Magento_Catalog::images/check-mark-black-outline-svgrepo-com.svg</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

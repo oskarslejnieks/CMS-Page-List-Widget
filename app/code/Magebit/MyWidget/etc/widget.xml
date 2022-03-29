@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="my_module_widget" class="Magebit\MyWidget\Block\Widget\Mymodule">
+        <label translate="true">Magebit_PageListWidget</label>
+        <description>description</description>
+        <parameters>
+            <parameter name="text_field" xsi:type="text" required="false" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="dropdown_field" required="true" xsi:type="select" visible="true" >
+                <label translate="true">Display Mode</label>
+                <options>
+                    <option name="all_pages" value="All Pages">
+                        <label translate="true">All Pages</label>
+                        
+                    </option>
+                    <option name="specific_pages" value="Specific Pages">
+                        <label translate="true">Specific Pages</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="sites" xsi:type="multiselect" required="true" visible="true" source_model="Magento\Cms\Model\Config\Source\Page">
+                <label translate="true">Selected Pages</label>
+                <depends>
+                    <parameter name="dropdown_field" value="Specific Pages" />
+                </depends>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
