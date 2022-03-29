@@ -37,6 +37,11 @@ class Mymodule extends Link implements BlockInterface {
         $cmsPages = $this->_pageRepositoryInterface->getList($searchCriteria)->getItems();
         return $cmsPages;
     }
+
+    public function getCurrentPage()
+    {
+        return $this->context->getFullActionName();
+    }
     
     protected $_template = "page-list.phtml";
     
