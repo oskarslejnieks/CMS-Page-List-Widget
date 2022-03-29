@@ -12,6 +12,9 @@ class Mymodule extends Link implements BlockInterface {
     /** @var PageRepositoryInterface */
     protected $_pageRepositoryInterface;
 
+    /** @var SearchCriteriaBuilder */
+    protected $_searchCriteriaBuilder;
+
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Cms\Api\PageRepositoryInterface $pageRepositoryInterface,
@@ -38,11 +41,6 @@ class Mymodule extends Link implements BlockInterface {
         return $cmsPages;
     }
 
-    public function getCurrentPage()
-    {
-        return $this->context->getFullActionName();
-    }
-    
     protected $_template = "page-list.phtml";
     
 }
