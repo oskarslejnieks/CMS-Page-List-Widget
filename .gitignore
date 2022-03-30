@@ -20,7 +20,6 @@ atlassian*
 /app/etc/registration_globlist.php
 /app/etc/vendor_path.php
 /app/etc/db_schema.xml
-
 /app/code/Magento/TestModule*
 /lib/internal/flex/uploader/.actionScriptProperties
 /lib/internal/flex/uploader/.flexProperties
