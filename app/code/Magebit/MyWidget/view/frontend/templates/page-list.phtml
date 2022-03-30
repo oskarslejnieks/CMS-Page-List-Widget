@@ -1,37 +1,69 @@
 <?php
-if ($block->getData('text_field')) {
-    echo "<h3><strong>" . $block->getData('text_field') . "</strong></h3>";
-}
+/**
+ * This file is part of the Magebit MyWidget package.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magebit_MyWidget
+ * to newer versions in the future.
+ *
+ * @copyright Copyright (c) 2021 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+declare(strict_types=1);
 ?>
+
+<?php if ($block->getData('text_field')): ?>
+    <?= "<h3><strong>" . $block->getData('text_field') . "</strong></h3>"; ?>
+<?php endif; ?>
+
 <ul>
+    
     <?php $cmsPages = $block->getCmsPageCollection(); ?>
     <?php $sites = $block->getData('sites'); ?>
 
-    <?php if($sites) { ?>
+    <?php if($sites): ?>
 
         <?php $siteExplode = explode(',', $sites) ?>
 
-        <?php foreach($siteExplode as $site) { ?>
+        <?php foreach($siteExplode as $site): ?>
             <li> 
                 <a href="<?= $site ?>">
-                    <?= $site ?> 
+                    <?php $urlKey = $site; ?>
+                    <?php $cmsPageObj = $block->getCmsPageDetails($urlKey); ?>
+                    <?php if(count($cmsPageObj) > 0): ?>
+                        <?php foreach ($cmsPageObj as $key => $value): ?>
+                            <?= $value->getTitle(); ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?> 
                 </a>
             </li>
-        <?php } ?>
-    <?php }
-
-    elseif($block->getData('dropdown_field')) { ?>
-        <?php foreach ($cmsPages as $cmsPage) { ?>
+        <?php endforeach; ?>
+    <?php elseif($block->getData('dropdown_field')): ?>
+        <?php foreach($cmsPages as $cmsPage): ?>
             <li>
                 <a href="<?=$cmsPage->getIdentifier() ?>">
-                    <?php echo $cmsPage->getTitle() ?>
+                    <?= $cmsPage->getTitle() ?>
                 </a>
             </li>
-        <?php } ?>
-    <?php } ?>
+        <?php endforeach; ?>
+        
+    <?php endif; ?>
 </ul>
     
 <?php 
+
+// if($block->getData('sites')) {
+//     foreach($collection as $page){
+//         echo $pages[$page->getId()] = $page->getTitle();
+//     }
+// }
+// var_dump($siteExplode);
+// var_dump($block->loadCMSPage());
 
 
 
