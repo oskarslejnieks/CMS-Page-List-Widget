@@ -27,7 +27,6 @@ use \Magento\Framework\View\Element\Template\Context;
 use \Magento\Framework\Api\SearchCriteriaBuilder;
 use \Magento\Cms\Model\PageFactory;
  
-
 class Mymodule extends Link implements BlockInterface 
 {
     
