@@ -84,10 +84,6 @@ class Mymodule extends Link implements BlockInterface
             $pages = $this->_pageRepositoryInterface->getList($searchCriteria)->getItems();
             return $pages;
         }
-        else 
-        {
-            return 'Page URL Key is invalid';
-        }
     }
 
     protected $_template = "page-list.phtml";
