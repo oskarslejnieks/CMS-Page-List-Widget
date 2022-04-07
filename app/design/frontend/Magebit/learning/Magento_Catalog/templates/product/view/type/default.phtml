@@ -4,18 +4,34 @@
  * See COPYING.txt for license details.
  */
 ?>
-<?php /* @var $block \Magento\Catalog\Block\Product\View\AbstractView */?>
+<?php /* @var $block \Magento\Catalog\Block\Product\View\AbstractView */ ?>
 <?php $_product = $block->getProduct() ?>
-
-<?php if ($block->displayProductStockStatus()) :?>
-    <?php if ($_product->isAvailable()) :?>
-        <div class="stock available" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
-            <span><?= $block->escapeHtml(__('In stock')) ?></span>
-            <?= "<span>".__($block->getProductDefaultQty()) . "</span>";?>
-        </div>
-    <?php else :?>
-        <div class="stock unavailable" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
-            <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
-        </div>
+<div class="product-secure-logos-holder">
+    <?php if($_product->getTypeId() == 'simple'): ?>
+    <?php if($block->displayProductStockStatus()) : ?>
+        <?php if($_product->isAvailable()) : ?>
+            <div class="stock available" title="<?=$block->escapeHtmlAttr(__('Availability'))?>">
+                <img style="width: 10px; height: 10px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Check_mark_9x9.svg/640px-Check_mark_9x9.svg.png" alt="">
+                <span style="text-transform: uppercase"><strong><?=$block->escapeHtml(__('In stock'))?></strong></span>
+                <span style="font-weight: 400; margin-left: 5px"><?=$_product->getExtensionAttributes()->getStockItem()->getQty()." items available";?></span>
+            </div>
+        <?php else : ?>
+            <div class="stock unavailable" title="<?=$block->escapeHtmlAttr(__('Availability'))?>">
+                <span><?=$block->escapeHtml(__('Out of stock'))?></span>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
-<?php endif; ?>
+    <?php else: ?>
+        <?php if($block->displayProductStockStatus()) : ?>
+            <?php if($_product->isAvailable()) : ?>
+                <div class="stock available" title="<?=$block->escapeHtmlAttr(__('Availability'))?>">
+                    <span style="text-transform: uppercase"><strong><?=$block->escapeHtml(__('In stock'))?></strong></span>
+                </div>
+            <?php else : ?>
+                <div class="stock unavailable" title="<?=$block->escapeHtmlAttr(__('Availability'))?>">
+                    <span><?=$block->escapeHtml(__('Out of stock'))?></span>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>
