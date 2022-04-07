@@ -21,9 +21,9 @@
         <table class="data table additional-attributes" id="product-attribute-specs-table">
             <caption class="table-caption"><?= $block->escapeHtml(__('More Information')) ?></caption>
             <tbody>
-            <?php foreach ($_additional as $_data) :?>
+            <?php foreach (array_slice($_additional, 0, 3) as $_data) :?>
                 <tr>
-                    <th><li class="col label" scope="row"><?= $block->escapeHtml($_data['label']) ?></li></th>
+                    <th><li class="col label" scope="row"><?= $block->escapeHtml($_data['label']) ?>:</li></th>
                     <td class="col data" data-th="<?= $block->escapeHtmlAttr($_data['label']) ?>"><?= /* @noEscape */ $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
                 </tr>
             <?php endforeach; ?>
