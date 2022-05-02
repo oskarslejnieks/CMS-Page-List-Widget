@@ -7,7 +7,7 @@
  * Do not edit or add to this file if you wish to upgrade Magebit_MyWidget
  * to newer versions in the future.
  *
- * @copyright Copyright (c) 2021 Magebit, Ltd. (https://magebit.com/)
+ * @copyright Copyright (c) 2022 Magebit, Ltd. (https://magebit.com/)
  * @author    Magebit <info@magebit.com>
  * @license   MIT
  *
@@ -17,31 +17,35 @@
 declare(strict_types=1);
 
 namespace Magebit\MyWidget\Block\Widget;
- 
-use \Magento\Framework\View\Element\Template;
+
+use Magento\Framework\Exception\LocalizedException;
 use \Magento\Widget\Block\BlockInterface;
 use \Magento\Framework\View\Element\Html\Link;
-use \Magento\Cms\Api;
 use \Magento\Cms\Api\PageRepositoryInterface;
 use \Magento\Framework\View\Element\Template\Context;
 use \Magento\Framework\Api\SearchCriteriaBuilder;
 use \Magento\Cms\Model\PageFactory;
 
-class Mymodule extends Link implements BlockInterface 
+class Mymodule extends Link implements BlockInterface
 {
-    
+    protected $_template = "page-list.phtml";
+
     /** @var PageRepositoryInterface */
-    protected $_pageRepositoryInterface;
+    protected PageRepositoryInterface $_pageRepositoryInterface;
 
     /** @var SearchCriteriaBuilder */
-    protected $_searchCriteriaBuilder;
-
-    protected $_pageFactory;
+    protected SearchCriteriaBuilder $_searchCriteriaBuilder;
 
     /**
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Cms\Api\PageRepositoryInterface $pageRepositoryInterface,
-     * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
+     * @var PageFactory
+     */
+    protected PageFactory $_pageFactory;
+
+    /**
+     * @param Context $context
+     * @param PageRepositoryInterface $pageRepositoryInterface ,
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder ,
+     * @param PageFactory $pageFactory
      * @param array $data
      */
     public function __construct(
@@ -50,7 +54,7 @@ class Mymodule extends Link implements BlockInterface
         SearchCriteriaBuilder $searchCriteriaBuilder,
         PageFactory $pageFactory,
         array $data = []
-    ) 
+    )
     {
         parent::__construct($context, $data);
         $this->_pageRepositoryInterface = $pageRepositoryInterface;
@@ -60,21 +64,23 @@ class Mymodule extends Link implements BlockInterface
 
     /**
      * Get Pages Collection from site
-     * 
+     *
      * @return array
+     * @throws LocalizedException
      */
 
-    public function getCmsPageCollection(): array 
+    public function getCmsPageCollection(): array
     {
         $searchCriteria = $this->_searchCriteriaBuilder->create();
-        $cmsPages = $this->_pageRepositoryInterface->getList($searchCriteria)->getItems();
-        return $cmsPages;
+        return $this->_pageRepositoryInterface->getList($searchCriteria)->getItems();
     }
 
     /**
      * Get Page collection with urlKey parameter
-     * 
+     *
+     * @param $urlKey
      * @return array
+     * @throws LocalizedException
      */
     public function getCmsPageDetails($urlKey): array
     {
@@ -82,10 +88,8 @@ class Mymodule extends Link implements BlockInterface
         {
             $searchCriteria = $this->_searchCriteriaBuilder->addFilter('identifier', $urlKey,'eq')->create();
             $pages = $this->_pageRepositoryInterface->getList($searchCriteria)->getItems();
-            return $pages;
-        }
-    }
 
-    protected $_template = "page-list.phtml";
-    
+        }
+        return $pages;
+    }
 }
