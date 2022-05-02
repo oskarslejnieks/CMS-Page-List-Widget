@@ -215,15 +215,9 @@ location ~ ^/(index|get|static|errors/report|errors/404|errors/503|health_check)
     fastcgi_read_timeout 600s;
     fastcgi_connect_timeout 600s;
 
-    # START MULTISITE customization
-    #fastcgi_param MAGE_RUN_TYPE website;
-    #fastcgi_param MAGE_RUN_CODE $MAGE_RUN_CODE;
-    # END - Multisite customization
-
     fastcgi_index  index.php;
     fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
     include        fastcgi_params;
-    
 }
 
 gzip on;

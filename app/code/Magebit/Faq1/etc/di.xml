@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magebit\Faq1\Api\Data\QuestionInterface" type="Magebit\Faq1\Model\Question" />
+    <preference for="Magebit\Faq1\Api\Data\QuestionSearchResultsInterface" type="Magebit\Faq1\Model\QuestionSearchResult" />
+    <preference for="Magebit\Faq1\Api\QuestionRepositoryInterface" type="Magebit\Faq1\Model\QuestionRepository" />
+    <virtualType name="Magebit\Faq1\Model\ResourceModel\Question\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">faq1</argument>
+            <argument name="resourceModel" xsi:type="string">Magebit\Faq1\Model\ResourceModel\Question</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="faq1_question_listing_data_source" xsi:type="string">Magebit\Faq1\Model\ResourceModel\Question\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="routingExample" xsi:type="array">
+                    <item name="class" xsi:type="string">Magebit\Faq1\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">40</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>
