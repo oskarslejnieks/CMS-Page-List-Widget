@@ -59,7 +59,6 @@ class QuestionList extends Template
      */
     private FilterBuilder $filterBuilder;
 
-
     /**
      * @param Context $context
      * @param QuestionRepository $questionRepository
