@@ -15,11 +15,8 @@ atlassian*
 /.idea
 /.gitattributes
 /app/config_sandbox
+/app/etc/config.php
 /app/etc/env.php
-/app/etc/NonComposerComponentRegistration.php
-/app/etc/registration_globlist.php
-/app/etc/vendor_path.php
-/app/etc/db_schema.xml
 /app/code/Magento/TestModule*
 /lib/internal/flex/uploader/.actionScriptProperties
 /lib/internal/flex/uploader/.flexProperties

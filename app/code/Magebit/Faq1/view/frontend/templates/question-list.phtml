@@ -1,0 +1,37 @@
+<?php
+/**
+ * This file is part of the Magebit MyWidget package.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magebit_MyWidget
+ * to newer versions in the future.
+ *
+ * @copyright Copyright (c) 2022 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+?>
+        <h1>Frequently Asked Questions</h1>
+        <?php foreach ($block->getQuestions() as $item): ?>
+            <div data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": true}}'>
+                <div data-role="collapsible" >
+                    <div data-role="trigger" >
+                        <div data-th="<?= $block->escapeHtml(__('Question')) ?>" class="col question">
+                            <?= $block->escapeHtml($item->getQuestion()) ?>
+                        </div>
+                    </div>
+                </div>
+                <div data-role="content">
+                    <p>
+                        <div data-th="<?= $block->escapeHtml(__('Answer')) ?>" class="col answer">
+                            <?= $block->escapeHtml($item->getAnswer()); ?>
+                        </div>
+                    </p>
+                </div>
+            </div>
+    <?php endforeach;; ?>
+

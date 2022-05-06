@@ -1,3 +1,9 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
 <div class="field qty">
     <div class="control qty-change">
         <?php $id = "qty_".$_product->getId(); ?>
@@ -11,5 +17,6 @@
                data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                />
         <button  type="button" class="increase items" onclick="var result = document.getElementById('<?= $id ?>'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;">+</button>
+
     </div>
 </div>

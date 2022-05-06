@@ -23,24 +23,6 @@ HTML;
     exit(1);
 }
 
-// $params = $_SERVER;
-// $domainName = $_SERVER['SERVER_NAME'];
-// switch ($domainName) {
-// case 'magento2ce-2.local':
-// $runType = 'website';
-// $runCode = 'testwebsite';
-// break;
-// // case 'sonal.grocery.com':
-// // $runType = 'website';
-// // $runCode = 'grocery';
-// // break;
-// default:
-// $runType = 'website';
-// $runCode = 'base';
-// }
-// $params[\Magento\Store\Model\StoreManager::PARAM_RUN_CODE] = $runCode;
-// $params[\Magento\Store\Model\StoreManager::PARAM_RUN_TYPE] = $runType;
-
 $bootstrap = Bootstrap::create(BP, $_SERVER);
 /** @var \Magento\Framework\App\Http $app */
 $app = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
