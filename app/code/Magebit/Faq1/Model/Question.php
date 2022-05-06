@@ -1,8 +1,20 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * This file is part of the Magebit FAQ1 package.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magebit_Faq1
+ * to newer versions in the future.
+ *
+ * @copyright Copyright (c) 2022 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 namespace Magebit\Faq1\Model;
 
 use Magento\Framework\Model\AbstractModel;
@@ -24,86 +36,99 @@ class Question extends AbstractModel implements QuestionInterface
     }
 
     /**
+     * Get ID
      * @return int|null
      */
-
     public function getId(): ?int
     {
         return $this->getData(self::QUESTION_ID);
     }
 
     /**
-     * @return string
+     * Get Question
+     * @return string|null
      */
-    public function getQuestion(): string
+    public function getQuestion(): ?string
     {
         return $this->getData(self::QUESTION);
     }
 
     /**
-     * @return string
+     * Get Answer
+     * @return string|null
      */
-    public function getAnswer(): string
+    public function getAnswer(): ?string
     {
         return $this->getData(self::ANSWER);
     }
 
     /**
-     * @return int
+     * Get Status
+     * @return int|null
      */
-    public function getStatus(): int
+    public function getStatus(): ?int
     {
         return $this->getData(self::STATUS);
     }
 
     /**
-     * @return int
+     * Get Position
+     * @return int|null
      */
-    public function getPosition(): int
+    public function getPosition(): ?int
     {
         return $this->getData(self::POSITION);
     }
 
     /**
-     * @return string
+     * get Updated At
+     * @return string|null
      */
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): ?string
     {
         return $this->getData(self::UPDATED_AT);
     }
 
     /**
+     * Set Question
+     * @type string
      * @param $question
-     * @return Question
+     * @return QuestionInterface
      */
-    public function setQuestion($question): Question
+    public function setQuestion($question): QuestionInterface
     {
         return $this->setData(self::QUESTION, $question);
     }
 
     /**
+     * Set Answer
+     * @type string
      * @param $answer
-     * @return Question
+     * @return QuestionInterface
      */
-    public function setAnswer($answer): Question
+    public function setAnswer($answer): QuestionInterface
     {
         return $this->setData(self::ANSWER, $answer);
     }
 
     /**
+     * Set Status
+     * @type int
      * @param $status
-     * @return Question
+     * @return QuestionInterface
      */
-    public function setStatus($status): Question
+    public function setStatus($status): QuestionInterface
     {
         return $this->setData(self::STATUS, $status);
     }
 
     /**
+     * Set Position
+     * @type int
      * @param $position
-     * @return Question
+     * @return QuestionInterface
      */
-    public function setPosition($position): Question
+    public function setPosition($position): QuestionInterface
     {
         return $this->setData(self::POSITION, $position);
     }

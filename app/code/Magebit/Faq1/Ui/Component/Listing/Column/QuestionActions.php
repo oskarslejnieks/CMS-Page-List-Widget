@@ -1,11 +1,24 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * This file is part of the Magebit FAQ1 package.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magebit_Faq1
+ * to newer versions in the future.
+ *
+ * @copyright Copyright (c) 2022 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
+
 namespace Magebit\Faq1\Ui\Component\Listing\Column;
 
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Escaper;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
@@ -73,13 +86,12 @@ class QuestionActions extends Column
                         'href' => $this->urlBuilder->getUrl($this->editUrl, ['id' => $item['id']]),
                         'label' => __('Edit')
                     ];
-                    $title = $this->getEscaper()->escapeHtml($item['question']);
                     $item[$name]['delete'] = [
                         'href' => $this->urlBuilder->getUrl(self::URL_PATH_DELETE, ['id' => $item['id']]),
                         'label' => __('Delete'),
                         'confirm' => [
-                            'title' => __('Delete %1', $title),
-                            'message' => __('Are you sure you want to delete a %1 record?', $title)
+                            'title' => __('Delete %1', $item['question']),
+                            'message' => __('Are you sure you want to delete a %1 record?', $item['question'])
                         ]
                     ];
                 }
@@ -87,18 +99,5 @@ class QuestionActions extends Column
         }
 
         return $dataSource;
-    }
-
-    /**
-     * Get instance of escaper
-     * @return Escaper
-     * @deprecated 101.0.7
-     */
-    private function getEscaper()
-    {
-        if (!$this->escaper) {
-            $this->escaper = ObjectManager::getInstance()->get(Escaper::class);
-        }
-        return $this->escaper;
     }
 }

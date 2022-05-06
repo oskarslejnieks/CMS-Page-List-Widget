@@ -1,14 +1,30 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * This file is part of the Magebit FAQ1 package.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magebit_Faq1
+ * to newer versions in the future.
+ *
+ * @copyright Copyright (c) 2022 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
+
 namespace Magebit\Faq1\Controller\Adminhtml\Question;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Ui\Component\MassAction\Filter;
 use Magebit\Faq1\Model\ResourceModel\Question\CollectionFactory;
 use Magebit\Faq1\Api\QuestionRepositoryInterface;
@@ -61,27 +77,20 @@ class MassDisable extends Action
     }
 
     /**
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws CouldNotSaveException
+     * @throws LocalizedException
      */
     public function execute()
     {
         $collection = $this->filter->getCollection($this->questionCollFactory->create());
         foreach($collection->getAllIds() as $questionId)
         {
-            /*
-             * About this... I know I have to call method "disableQuestion()" here, but when I try to call
-             * it, I either get an error or it just permanently loads. These 3 lines are exactly the same as
-             * 3 lines in disableQuestion method.
-             */
-            $questionDataObject = $this->questionRepository->get($questionId);
-            $questionDataObject->setStatus(0);
-            $this->questionRepository->save($questionDataObject);
+            $this->questionManagement->disableQuestion((int) $questionId);
         }
         $this->messageManager->addSuccess(__('A total of %1 record(s) have been disabled.', $collection->getSize()));
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+
         return $resultRedirect->setPath('faq1/question/index');
     }
 }
-

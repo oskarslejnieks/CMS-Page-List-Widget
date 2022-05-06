@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * This file is part of the Magebit FAQ1 package.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magebit_Faq1
+ * to newer versions in the future.
+ *
+ * @copyright Copyright (c) 2022 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <!--Declare data source, columns list, button...-->
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">faq1_question_listing.faq1_question_listing_data_source</item>
-            <!-- the format here is uicomponentname.datasourcename -->
             <item name="deps" xsi:type="string">faq1_question_listing.faq1_question_listing_data_source</item>
-            <!-- the format here is uicomponentname.datasourcename -->
         </item>
         <item name="spinner" xsi:type="string">faq1_question_columns</item>
         <!--Declare the listing of columns which will be defined below-->
@@ -209,7 +224,6 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">id</item>
-<!--                    <item name="urlEntityParamName" xsi:type="string">id</item>-->
                 </item>
             </argument>
         </actionsColumn>

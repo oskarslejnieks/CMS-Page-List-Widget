@@ -1,14 +1,31 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * This file is part of the Magebit FAQ1 package.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magebit_Faq1
+ * to newer versions in the future.
+ *
+ * @copyright Copyright (c) 2022 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
+
 namespace Magebit\Faq1\Controller\Adminhtml\Question;
 
+use Magebit\Faq1\Model\QuestionManagement;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Ui\Component\MassAction\Filter;
 use Magebit\Faq1\Model\ResourceModel\Question\CollectionFactory;
 use Magebit\Faq1\Api\QuestionRepositoryInterface;
@@ -18,7 +35,10 @@ use Magebit\Faq1\Api\QuestionRepositoryInterface;
  */
 class MassEnable extends Action
 {
-
+    /**
+     * @var QuestionManagement
+     */
+    protected QuestionManagement $questionManagement;
     /**
      * @var Filter
      */
@@ -44,31 +64,26 @@ class MassEnable extends Action
         Context $context,
         Filter $filter,
         CollectionFactory $questionCollFactory,
-        QuestionRepositoryInterface $questionRepository)
+        QuestionRepositoryInterface $questionRepository,
+        QuestionManagement $questionManagement)
     {
         $this->filter = $filter;
         $this->questionCollFactory = $questionCollFactory;
         $this->questionRepository = $questionRepository;
+        $this->questionManagement = $questionManagement;
         parent::__construct($context);
     }
 
     /**
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws CouldNotSaveException
+     * @throws LocalizedException
      */
     public function execute()
     {
         $collection = $this->filter->getCollection($this->questionCollFactory->create());
         foreach($collection->getAllIds() as $questionId)
         {
-            /*
-             * About this... I know I have to call method "enableQuestion()" here, but when I try to call
-             * it, I either get an error or it just permanently loads. These 3 lines are exactly the same as
-             * 3 lines in enableQuestion method.
-             */
-            $questionDataObject = $this->questionRepository->get($questionId);
-            $questionDataObject->setStatus(1);
-            $this->questionRepository->save($questionDataObject);
+           $this->questionManagement->enableQuestion((int) $questionId);
         }
         $this->messageManager->addSuccess(__('A total of %1 record(s) have been enabled.', $collection->getSize()));
         /** @var Redirect $resultRedirect */
@@ -76,4 +91,3 @@ class MassEnable extends Action
         return $resultRedirect->setPath('faq1/question/index');
     }
 }
-

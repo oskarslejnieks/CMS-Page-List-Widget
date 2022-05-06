@@ -1,11 +1,23 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * This file is part of the Magebit FAQ1 package.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magebit_Faq1
+ * to newer versions in the future.
+ *
+ * @copyright Copyright (c) 2022 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-namespace Magebit\Faq1\Api;
 
-use Magebit\Faq1\Api\Data\QuestionInterface;
+declare(strict_types=1);
+
+namespace Magebit\Faq1\Api;
 
 /**
  * Interface that defines 2 methods - enableQuestion and DisableQuestion
@@ -13,14 +25,14 @@ use Magebit\Faq1\Api\Data\QuestionInterface;
 interface QuestionManagementInterface
 {
     /**
-     * @param QuestionInterface $question
+     * @param int $questionId
      * @return bool
      */
-    public function enableQuestion(QuestionInterface $question): bool;
+    public function enableQuestion(int $questionId): bool;
 
     /**
-     * @param QuestionInterface $question
+     * @param int $questionId
      * @return bool
      */
-    public function disableQuestion(QuestionInterface $question): bool;
+    public function disableQuestion(int $questionId): bool;
 }
